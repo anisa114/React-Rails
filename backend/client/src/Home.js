@@ -16,6 +16,14 @@ class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    axios(`/api/surveys`)
+      .then(response => {
+        console.log(response);
+        this.setState({ surveys: response.data.surveys });
+      })
+      .catch(error => console.log(error));
+  }
   handleClick = id => e => {
     console.log("clicked", id);
     this.setState({
@@ -25,14 +33,6 @@ class Home extends Component {
       }
     });
   };
-  componentDidMount() {
-    axios(`/api/surveys`)
-      .then(response => {
-        console.log(response);
-        this.setState({ surveys: response.data.surveys });
-      })
-      .catch(error => console.log(error));
-  }
   render() {
     const survey = this.state.surveys.map(survey => {
       return (

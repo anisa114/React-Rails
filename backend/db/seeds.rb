@@ -30,6 +30,15 @@ question7 = Question.create(survey_id:2, text:"Do you experience pain? How sever
 question8 = Question.create(survey_id:2, text:"How often do you visit the doctor?")
 question9 = Question.create(survey_id:2, text:"Does the arthritis impede you from completing daily tasks? Please give an example?")
 question10 = Question.create(survey_id:2, text:"What medication do you take and how often do you take it?")
-    
+
+
+# Associating surveys with users;
+SurveyUser.create(user_id:1, survey_id:1);
+SurveyUser.create(user_id:2, survey_id:2);
+SurveyUser.create(user_id:3, survey_id:1);
+SurveyUser.create(user_id:3, survey_id:2);
+
+
+
 
 
