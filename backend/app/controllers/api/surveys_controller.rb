@@ -1,6 +1,8 @@
 class Api::SurveysController < ApplicationController
     def index
-        @surveys = Survey.all
+      id = params["ID"]
+        @users = User.find(id);
+        @surveys= @users.surveys
         render :json =>  {
             :surveys => @surveys.as_json}
       end

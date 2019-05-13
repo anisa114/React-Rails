@@ -3,12 +3,14 @@ import axios from "axios";
 import SurveyCard from "./SurveyCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import qs from "qs";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       surveys: [],
+      user: {},
       click: {
         bool: false,
         id: 0
@@ -17,7 +19,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios(`/api/surveys`)
+    let user = this.props.location.state;
+    console.log(user);
+    this.setState({ user });
+    axios.defaults.paramsSerializer = params => {
+      return qs.stringify(params, { arrayFormat: "brackets" });
+    };
+    axios(`/api/surveys`, {
+      params: {
+        ID: user.id
+      }
+    })
       .then(response => {
         console.log(response);
         this.setState({ surveys: response.data.surveys });
@@ -48,7 +60,7 @@ class Home extends Component {
     });
     return (
       <div>
-        <h1>Welcome back, Anisa</h1>
+        <h1>Welcome back,{this.state.user.name} </h1>
         <h4>Please complete the following surveys</h4>
         <Container>
           <Row>{survey}</Row>
