@@ -10,31 +10,36 @@ class Home extends Component {
     super();
     this.state = {
       surveys: [],
-      user: {},
+      username: "",
       click: {
         bool: false,
-        id: 0
+        id: 0,
+        error: null
       }
     };
   }
 
   componentDidMount() {
-    let user = this.props.location.state;
-    console.log(user);
-    this.setState({ user });
+    let token = "Bearer " + localStorage.getItem("jwt");
     axios.defaults.paramsSerializer = params => {
       return qs.stringify(params, { arrayFormat: "brackets" });
     };
-    axios(`/api/surveys`, {
-      params: {
-        ID: user.id
-      }
+    axios({
+      method: "get",
+      url: "/api/surveys",
+      headers: { Authorization: token }
     })
       .then(response => {
         console.log(response);
-        this.setState({ surveys: response.data.surveys });
+        this.setState({
+          surveys: response.data.surveys,
+          username: response.data.name
+        });
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        this.setState({ error: "Acesss Denied" });
+      });
   }
   handleClick = id => e => {
     console.log("clicked", id);
@@ -58,15 +63,20 @@ class Home extends Component {
         />
       );
     });
-    return (
-      <div>
-        <h1>Welcome back,{this.state.user.name} </h1>
-        <h4>Please complete the following surveys</h4>
-        <Container>
-          <Row>{survey}</Row>
-        </Container>
-      </div>
-    );
+
+    if (!this.state.error) {
+      return (
+        <div>
+          <h1>Welcome back, {this.state.username}</h1>
+          <h4>Please complete the following surveys</h4>
+          <Container>
+            <Row>{survey}</Row>
+          </Container>
+        </div>
+      );
+    } else {
+      return <div>{this.state.error}</div>;
+    }
   }
 }
 export default Home;
