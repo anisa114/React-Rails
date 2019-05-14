@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
-import { Redirect } from "react-router";
 
 const loginStyles = {
   paddingTop: "15px",
@@ -16,35 +15,25 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        id: 0,
-        name: ""
-      },
-      authenticate: false,
       error: null
     };
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    let email = event.target.email.value;
-    let password = event.target.password.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const request = { auth: { email: email, password: password } };
     axios
-      .post("/login", {
-        email: email,
-        password: password
-      })
+      .post("/api/user_token", request)
       .then(response => {
         console.log(response);
-        let user = {
-          id: response.data.session.id,
-          name: response.data.session.name
-        };
-        this.setState({ user, authenticate: true });
+        localStorage.setItem("jwt", response.data.jwt);
+        this.props.handleLogin();
+        this.props.history.push("/home");
       })
       .catch(error => {
-        console.log(error.request);
-        console.log(error.response);
+        console.log("error", error);
         this.setState({ error: "Invalid Email" });
       });
   };
@@ -77,17 +66,6 @@ class Login extends Component {
               </Button>
             </Form>
             {this.state.error}
-            {this.state.authenticate && (
-              <Redirect
-                to={{
-                  pathname: "/home",
-                  state: {
-                    id: this.state.user.id,
-                    name: this.state.user.name
-                  }
-                }}
-              />
-            )}
           </Col>
         </Row>
       </Container>

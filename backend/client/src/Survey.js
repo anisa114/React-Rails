@@ -14,7 +14,12 @@ class Survey extends Component {
   }
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios(`/api/surveys/${id}`)
+    let token = "Bearer " + localStorage.getItem("jwt");
+    axios({
+      method: "get",
+      url: `/api/surveys/${id}`,
+      headers: { Authorization: token }
+    })
       .then(response => {
         let questions = response.data.questions;
         console.log(questions);

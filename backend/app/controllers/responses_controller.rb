@@ -1,4 +1,4 @@
-class Api::ResponsesController < ApplicationController
+class ResponsesController < ApplicationController
 
     def index 
         @responses = Response.all
