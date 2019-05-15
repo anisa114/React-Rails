@@ -18,7 +18,10 @@ Users can then submit responses for the survey questions which then will be save
 
 ### Getting Started
 
+- Update the database.yml file with your correct local information
 - cd into backend folder and install all dependencies (using the bundle install command)
+- Run the migrations ``` rake db:migrate ```
+- Run the seed``` rake db:seed ```
 - cd into client folder and install all dependencies (using the npm install command)
 - Run the development web server using 'rake start' command from the backend folder
 
