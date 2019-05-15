@@ -3,6 +3,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Home from "./Home";
 import Survey from "./Survey";
+import Navbar from "react-bootstrap/Navbar";
 import Complete from "./Complete";
 import {
   BrowserRouter as Router,
@@ -37,28 +38,17 @@ class App extends Component {
 }
 
 const Navigation = props => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <ul className="navbar-nav mr-auto">
-      {props.login && localStorage.getItem("jwt") ? (
-        <li className="nav-item">
-          <NavLink exact className="nav-link" to="/logout">
-            Log Out
-          </NavLink>
-        </li>
-      ) : (
-        <li className="nav-item">
-          <NavLink
-            exact
-            className="nav-link"
-            activeClassName="active"
-            to="/login"
-          >
-            Log In
-          </NavLink>
-        </li>
-      )}
-    </ul>
-  </nav>
+  <Navbar>
+    {props.login && localStorage.getItem("jwt") ? (
+      <NavLink exact className="nav-link" to="/logout">
+        Log Out
+      </NavLink>
+    ) : (
+      <NavLink exact className="nav-link" activeClassName="active" to="/login">
+        Log In
+      </NavLink>
+    )}
+  </Navbar>
 );
 
 const Main = prop => (

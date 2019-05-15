@@ -19,20 +19,22 @@ class Question extends Component {
   render() {
     if (this.props.display) {
       return (
-        <Card className="text-center">
-          <Card.Body>
-            <Card.Title>Question</Card.Title>
-            <Card.Text>{this.props.question}</Card.Text>
-            <textarea
-              value={this.state.response}
-              onChange={this.handleChange}
-              style={{ width: "600px", resize: "none", height: "250px" }}
-            />
-          </Card.Body>
-          <Button onClick={this.saveAndNext} variant="primary">
-            Next
-          </Button>
-        </Card>
+        <div>
+          <Card style={{ width: "30rem", margin: "0 auto" }}>
+            <Card.Body className="text-center">
+              <Card.Title>Question</Card.Title>
+              <Card.Text>{this.props.question}</Card.Text>
+              <textarea
+                value={this.state.response}
+                onChange={this.handleChange}
+                style={{ width: "20rem", resize: "none", height: "250px" }}
+              />
+            </Card.Body>
+            <Button onClick={this.saveAndNext} variant="info">
+              Next
+            </Button>
+          </Card>
+        </div>
       );
     }
     return null;

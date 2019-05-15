@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import { Redirect } from "react-router";
 
 class SurveyCard extends Component {
   render() {
     let to = `/survey/${this.props.clickID}`;
     return (
-      <Card
+      <div
         onClick={this.props.handleClick(this.props.id)}
         border="success"
         style={{ width: "18rem" }}
       >
-        <Card.Body>
-          <Card.Title>{this.props.name}</Card.Title>
-        </Card.Body>
+        <Button>{this.props.name}</Button>
+
         {this.props.bool && <Redirect to={to} />}
-      </Card>
+      </div>
     );
   }
 }

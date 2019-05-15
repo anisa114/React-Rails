@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Logo from "./Logo";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -8,8 +9,8 @@ import axios from "axios";
 
 const loginStyles = {
   paddingTop: "15px",
-  color: "black",
-  textShadow: "0px 2px 3px black"
+  color: "white",
+  margin: "10% auto"
 };
 class Login extends Component {
   constructor() {
@@ -41,7 +42,9 @@ class Login extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={8} />
+          <Col sm={8}>
+            <Logo />
+          </Col>
           <Col style={loginStyles} sm={4}>
             <Form onSubmit={this.handleSubmit}>
               <h1>Login</h1>
@@ -61,11 +64,11 @@ class Login extends Component {
                   placeholder="Password"
                 />
               </Form.Group>
-              <Button variant="info" type="submit">
+              <Button variant="primary" type="submit">
                 Submit
               </Button>
             </Form>
-            {this.state.error}
+            <div style={{ color: "darkred" }}>{this.state.error}</div>
           </Col>
         </Row>
       </Container>

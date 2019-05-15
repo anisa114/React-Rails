@@ -67,8 +67,11 @@ class Home extends Component {
     if (!this.state.error) {
       return (
         <div>
-          <h1>Welcome back, {this.state.username}</h1>
-          <h4>Please complete the following surveys</h4>
+          <div className="title">
+            <h1>Welcome back, {this.state.username}</h1>
+            <h4>Please complete the following surveys</h4>
+          </div>
+
           <Container>
             <Row>{survey}</Row>
           </Container>
