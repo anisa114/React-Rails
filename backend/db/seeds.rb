@@ -8,9 +8,9 @@
 
 # Creating users
 
-user1 = User.create!(name: "Anisa", email: "anisa@hotmail.com", password: "hello1");
-user2 = User.create!(name: "Halima", email: "halima@hotmail.com", password: "hello2");
-user3 = User.create!(name: "Sarah", email: "sarah@hotmail.com", password: "hello3");
+user1 = User.create!(name: "Anisa", email: "anisa@gmail.com", password: "pass_good");
+user2 = User.create!(name: "John", email: "john@gmail.com", password: "pass_good");
+user3 = User.create!(name: "Sarah", email: "sarah@gmail.com", password: "pass_good");
 
 # Creating Surveys
 survey1 = Survey.create(name:"Epilepsy");

@@ -22,14 +22,12 @@ class Survey extends Component {
     })
       .then(response => {
         let questions = response.data.questions;
-        console.log(questions);
         this.setState({ questions });
       })
       .catch(error => console.log(error));
   }
 
   nextQuestion = response => {
-    console.log("This is the resposne", response);
     if (this.state.activeQuestion < this.state.questions.length - 1) {
       axios.post("/api/responses", {
         user_id: 1,
@@ -41,7 +39,6 @@ class Survey extends Component {
         activeQuestion: this.state.activeQuestion + 1
       });
     } else {
-      console.log("Survey Done..");
       this.setState({ endOfSurvey: true });
     }
   };

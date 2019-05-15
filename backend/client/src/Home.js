@@ -30,7 +30,6 @@ class Home extends Component {
       headers: { Authorization: token }
     })
       .then(response => {
-        console.log(response);
         this.setState({
           surveys: response.data.surveys,
           username: response.data.name
@@ -42,7 +41,6 @@ class Home extends Component {
       });
   }
   handleClick = id => e => {
-    console.log("clicked", id);
     this.setState({
       click: {
         bool: true,
